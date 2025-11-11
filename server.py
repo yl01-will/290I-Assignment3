@@ -36,7 +36,7 @@ async def create_upload_file(file: UploadFile):
     except Exception as e:
         print("Upload failed:", e)
         return {"Upload Error": "Invalid JSON content"}
-    raise NotImplementedError("/upload_graph_json not yet implemented.")
+    #raise NotImplementedError("/upload_graph_json not yet implemented.")
 
 
 @app.get("/solve_shortest_path/start_node_id={start_node_id}&end_node_id={end_node_id}")
@@ -67,7 +67,7 @@ async def get_shortest_path(start_node_id: str, end_node_id: str):
     path.reverse()
 
     return {"shortest_path": path, "total_distance": float(end_node.dist)}
-    raise NotImplementedError("/solve_shortest_path not yet implemented.")
+    #raise NotImplementedError("/solve_shortest_path not yet implemented.")
 
 if __name__ == "__main__":
     print("Server is running at http://localhost:8080")
