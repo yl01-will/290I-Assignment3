@@ -22,10 +22,19 @@ async def create_upload_file(file: UploadFile):
     filename = file.filename or ""
     if not filename.lower().endswith(".json"):
         return {"Upload Error": "Invalid file type"}
+
     try:
-        active_graph = create_graph_from_json(file)
+        # Read the uploaded file’s contents into memory
+        content = await file.read()
+        import json
+        graph_data = json.loads(content.decode("utf-8"))
+
+        # Use your existing helper to build the graph from parsed data
+        active_graph = create_graph_from_json(graph_data)
         return {"Upload Success": filename}
-    except Exception:
+
+    except Exception as e:
+        print("Upload failed:", e)
         return {"Upload Error": "Invalid JSON content"}
     raise NotImplementedError("/upload_graph_json not yet implemented.")
 
